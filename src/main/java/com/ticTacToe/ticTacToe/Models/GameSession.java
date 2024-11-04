@@ -12,7 +12,7 @@ public class GameSession {
         this.player1 = player1;
         this.player2 = player2;
         this.boardStatus = new Character[]{' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-        this.playerOneMove = true;
+        this.playerOneMove = false;
     }
 
 

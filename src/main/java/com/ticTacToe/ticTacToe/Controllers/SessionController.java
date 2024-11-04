@@ -16,6 +16,7 @@ public class SessionController {
     @Autowired
     SessionService sessionService;
 
+
     @GetMapping("/getGameSession/{name}")
     public ResponseEntity<GameSession> getGameSession(@PathVariable String name) {
 
