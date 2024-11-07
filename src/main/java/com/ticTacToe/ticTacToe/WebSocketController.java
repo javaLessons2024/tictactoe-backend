@@ -13,6 +13,7 @@ import org.springframework.web.util.HtmlUtils;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 @RestController
 public class WebSocketController {
@@ -47,12 +48,20 @@ public class WebSocketController {
 
     public boolean isMoveLegal(GameSession gameSession){
         int mismatchTimes = 0;
+
+        Character[] emptyList = new Character[]{' ',' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+        if(Arrays.deepEquals(emptyList, gameSession.getBoardStatus())){
+            return true;
+        }
+
         GameSession gameSessionRedis = redisService.getGameSession(gameSession.getSessionId());
         for(int i = 0; i < 9; i++){
             if(gameSession.getBoardStatus()[i] != gameSessionRedis.getBoardStatus()[i]){
                 mismatchTimes++;
+
             }
         }
+
         if(mismatchTimes > 1){
             return false;
         }
