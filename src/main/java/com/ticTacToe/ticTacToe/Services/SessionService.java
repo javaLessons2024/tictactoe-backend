@@ -17,7 +17,7 @@ public class SessionService {
         Set<GameSession> gameSessionSet = redisService.getAllGameSessions();
 
         for (GameSession gameSession : gameSessionSet){
-            if(gameSession.getPlayer2() == null){
+            if(gameSession.getPlayer2() == null || !gameSession.getPlayer1().equals(name)){
                 gameSession.setPlayer2(name);
                 redisService.put(gameSession.getSessionId(),gameSession);
                 return gameSession;
