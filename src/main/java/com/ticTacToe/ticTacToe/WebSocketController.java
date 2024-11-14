@@ -1,5 +1,6 @@
 package com.ticTacToe.ticTacToe;
 
+import com.ticTacToe.ticTacToe.Models.ChatMessage;
 import com.ticTacToe.ticTacToe.Models.GameSession;
 import com.ticTacToe.ticTacToe.Services.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,11 @@ public class WebSocketController {
     public String handleSignalMessage(String message) {
         System.out.println("Received STOMP message: " + message);
         return message;
+    }
+    @MessageMapping("/chatMessage/{sessionId}")
+    @SendTo("/topic/chatMessage/{sessionId}")
+    public ChatMessage echoChatMessage(ChatMessage chatMessage) {
+        return chatMessage;
     }
 
     @MessageMapping("/game/{sessionId}")
